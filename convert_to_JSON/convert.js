@@ -1,7 +1,12 @@
+// Muestra el JSON creado en el textarea
+function showJsonOutput() {
+    const jsonOutput = document.getElementById("jsonOutput");
+    jsonOutput.value = JSON.stringify(jsonCreado, null, 4);
+}
 //documento encargado de la logica del convertidor a JSON
 let  typemessage = "none";
 const messageText = document.getElementById("messageText");
-let tables = []; //en donde se guarda la tabla para convertir a JSON
+let tables = {}; //en donde se guarda la tabla para convertir a JSON
 let archive = null; //variable para guardar el archivo subido
 let jsonElements = []; //varible para guardar elementos del JSON
 let jsonCreado = {}; //variable para guardar el JSON creado
@@ -10,23 +15,133 @@ let tableClaves = false; //vaiable para saber si las claves de la tabla coincide
 
 
 
-closeMessage();
-closeConfirmation();
+window.addEventListener('DOMContentLoaded', () => {
+    guardarYActualizarTabla();
+    closeMessage();
+    closeConfirmation();
+});
 // funciones para los botones de control en el footer
 //Funciones para la creacion del Json y los botones de la seccion final
+
+function convert(){
+    guardarYActualizarTabla();
+    closeMessage();
+    closeConfirmation();
+    // Obtener encabezado
+    const headerFields = document.getElementById("headerFields").getElementsByClassName("headerField");
+    let encabezado = {};
+    for (let i = 0; i < headerFields.length; i++) {
+        const inputs = headerFields[i].getElementsByTagName("input");
+        if (inputs.length >= 2) {
+            const key = inputs[0].value.trim();
+            const value = inputs[1].value.trim();
+            if (key) encabezado[key] = value;
+        }
+    }
+
+    // Obtener cuerpo
+    let cuerpo = [];
+    // Si hay archivo y es válido, usar los datos del archivo para el cuerpo
+    if (archive != null && FileValidation() === true) {
+        // El archivo debe ser un array de arrays, la primera fila son las claves
+        let claves = archive[0];
+        for (let i = 1; i < archive.length; i++) {
+            let fila = archive[i];
+            let obj = {};
+            for (let j = 0; j < claves.length; j++) {
+                obj[claves[j]] = fila[j];
+            }
+            cuerpo.push(obj);
+        }
+    } else if (archive == null && tableValidation() === true) {
+        // Usar los datos de la tabla para el cuerpo
+        if (tables && tables.rows) {
+            cuerpo = tables.rows;
+        }
+    } else {
+        typemessage = "error";
+        messageError();
+        messageText.innerHTML = "No se puede convertir a JSON. Verifica las claves y los datos.";
+        return;
+    }
+
+    // Construir el JSON final
+    let jsonFinal = { ...encabezado, conector: cuerpo };
+    jsonCreado = jsonFinal;
+    // Mostrar en el textarea
+    const jsonOutput = document.getElementById("jsonOutput");
+    jsonOutput.value = JSON.stringify(jsonFinal, null, 4);
+}
+
 function confirmation(){
     confirmationText.innerHTML = "la estructura del Json toma como claves los valores de la primera fila de la tabla o los archivos subidos, asegurese de que estos valores coincidan con las claves definidas en la estructura de Json, si no es asi se generara un error. etiende esto?"
     showConfirmation();
 }
 
 function FileValidation(){ 
-    //valida que la primera fila del archivo coincida exactamente con las claves del crador de formato Json
+    //valida que la primera fila del archivo subido coincida exactamente con las claves del crador de formato Json
     //la clase "clave" es la que tiene que coincidir con la primera fila del archivo
     //si el archivo esta vacio lansar un error asi= "fileClaves = "error"", de otro modo solo regresar "fileClaves = true" o "fileClaves = false" respectivamente
-    const clave = document.getElementsByClassName("clave");
-
+    // Solo tomar claves del selector de formato (estructura), no del encabezado global
+    const jsonStructure = document.getElementById("jsonStructure");
+    const claveInputs = jsonStructure.querySelectorAll(".jsonField .clave");
+        let clavesJson = [];
+        for (let i = 0; i < claveInputs.length; i++) {
+            clavesJson.push(claveInputs[i].value.trim());
+        }
+        // Validar archivo
+        if (!archive || !Array.isArray(archive) || archive.length === 0) {
+            fileClaves = "error";
+            typemessage = "error";
+            messageError();
+            messageText.innerHTML = "El archivo está vacío o no es válido.";
+            return fileClaves;
+        }
+        // Tomar la primera fila del archivo como claves
+        let clavesArchivo = archive[0];
+        if (!Array.isArray(clavesArchivo)) {
+            fileClaves = "error";
+            typemessage = "error";
+            messageError();
+            messageText.innerHTML = "El formato del archivo no es válido.";
+            return fileClaves;
+        }
+    // Comparar claves (solo que existan, sin importar el orden ni el contenido)
+    let iguales = clavesJson.length === clavesArchivo.length && clavesJson.every(v => clavesArchivo.includes(v));
+    fileClaves = iguales;
+    return fileClaves;
 }
 
+function tableValidation(){
+    // Solo tomar claves del selector de formato (estructura), no del encabezado global
+    const jsonStructure = document.getElementById("jsonStructure");
+    const claveInputs = jsonStructure.querySelectorAll(".jsonField .clave");
+    let clavesJson = [];
+    for (let i = 0; i < claveInputs.length; i++) {
+        clavesJson.push(claveInputs[i].value.trim());
+    }
+    // Validar tabla
+    if (!tables || !tables.headers || tables.headers.length === 0) {
+        tableClaves = "error";
+        typemessage = "error";
+        messageError();
+        messageText.innerHTML = "La tabla está vacía o no es válida.";
+        return tableClaves;
+    }
+    // Tomar los encabezados de la tabla como claves
+    let clavesTabla = tables.headers;
+    if (!Array.isArray(clavesTabla)) {
+        tableClaves = "error";
+        typemessage = "error";
+        messageError();
+        messageText.innerHTML = "El formato de la tabla no es válido.";
+        return tableClaves;
+    }
+    // Comparar claves (solo que existan, sin importar el orden ni el contenido)
+    let iguales = clavesJson.length === clavesTabla.length && clavesJson.every(v => clavesTabla.includes(v));
+    tableClaves = iguales;
+    return tableClaves;
+}
 
 //funciones para el manejo del encabezado global y la estructura del JSON
 
@@ -280,12 +395,14 @@ function removeColumn(){
     if (rowCount <= 1 ){
         typemessage = "error";
         messageError();
-        messageText.innerHTML = "no se puede eliminar la columna, debe haber al menos una columna";
+        messageText.innerHTML = "No se puede eliminar la columna, debe haber al menos una columna.";
         return;
     }
     headerRow.deleteCell(rowCount-1);
     for (let i = 0; i < tbody.rows.length; i++) {
-    tbody.rows[i].deleteCell(rowCount - 1);
+        if (tbody.rows[i].cells.length > 1) {
+            tbody.rows[i].deleteCell(rowCount - 1);
+        }
     }
     guardarYActualizarTabla();
 }
@@ -293,10 +410,12 @@ function removeColumn(){
 function removeRow(){
     const table = document.getElementById("dataTable");
     const rowCount = table.rows.length;
-    if (rowCount <= 1 ){
+    // Solo elimina si hay más de una fila en tbody
+    const tbody = table.tBodies[0];
+    if (tbody.rows.length <= 1) {
         typemessage = "error";
         messageError();
-        messageText.innerHTML = "no se puede eliminar la fila, debe haber al menos una fila";
+        messageText.innerHTML = "No se puede eliminar la fila, debe haber al menos una fila.";
         return;
     }
     table.deleteRow(rowCount-1);
@@ -307,13 +426,13 @@ function removeRow(){
 
 if (typemessage === "none") {
     messageclose();
-}else if (typemessage === "error"){
-        messageError();
-    }else if (typemessage === "warning"){
-        messageWarning();
-    }else if (typemessage === "confirmation"){
-        showConfirmation();
-    }
+} else if (typemessage === "error") {
+    messageError();
+} else if (typemessage === "warning") {
+    messageWarning();
+} else if (typemessage === "confirmation") {
+    showConfirmation();
+}
 
 
 // FUNCIONES DE MENSAJES

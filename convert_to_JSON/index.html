@@ -112,7 +112,7 @@
         <h2>estructura del Json</h2>
         <div id="jsonStructure">
             <div class="jsonField">
-                <input type="text" value="id" placeholder="clave" readonly>
+                <input type="text" value="id" placeholder="clave" readonly class="clave">
                 <input type="text" placeholder="valor" readonly>
             </div>
             <div class="jsonField">
@@ -129,9 +129,10 @@
         </div>
     </div><br><hr><br>
     <div id="jsonResult">
-        <button id="convertToJson" onclick="confirmation()">Convertir a Json</button>
+    <button id="convertToJson" onclick="confirmation()">Convertir a Json</button>
+    <button id="showJsonOutput" onclick="showJsonOutput()">Mostrar JSON generado</button>
         <h2>Resultado en JSON</h2>
-        <textarea id="jsonOutput" rows="10" cols="50" readonly>aqui aprecera tu JSON</textarea><br>
+        <textarea  id="jsonOutput" rows="10" cols="50" readonly>aqui aprecera tu JSON</textarea><br>
         <button id="copyJson" onclick="copyJson()">Copiar Json</button>
         <button id="downLoadJson" onclick="downLoadJson()">Descargar JSON</button>
     </div>
