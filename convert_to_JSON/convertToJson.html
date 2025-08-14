@@ -34,7 +34,7 @@
         <h2>selecciona el formato del JSON a crear</h2>
         <button id="formatInfoButton" class="infoToolTip">!</button>
         <div id="inputsFormats">
-        <div id="headerFormatInput">
+            <div id="headerFormatInput" class="column1">
                 <div class="headerInputFormatContainer">
                     <input type="text" placeholder="clave" class="headerInputClave">
                     <input type="text" placeholder="valor" class="headerInputValor">
@@ -43,13 +43,12 @@
                     <input type="text" placeholder="clave" class="headerInputClave">
                     <input type="text" placeholder="valor" class="headerInputValor">
                 </div>
+                    <div id="addHeaderInput" class="addHeaderInputContainer">
+                        <button id="addHeaderInputBtn" onclick="addHeaderInput()">Agregar</button>
+                        <button id="removeHeaderInputButton" onclick="removeHeaderInput()">Eliminar</button>
+                    </div>
                 </div>
-                <div id="addHeaderInput" class="addHeaderInputContainer">
-                    <button id="addHeaderInputBtn" onclick="addHeaderInput()">Agregar</button>
-                    <button id="removeHeaderInputButton" onclick="removeHeaderInput()">Eliminar</button>
-                </div>
-                </div>
-                <div id="bodyFormatInput">
+            <div id="bodyFormatInput" class="column1">
                 <div class="bodyInputFormatContainer">
                     <input type="text" placeholder="clave" class="bodyInputClave">
                     <input type="text" placeholder="valor" class="bodyInputValor" readonly>
@@ -57,46 +56,46 @@
                 <div class="bodyInputFormatContainer">
                     <input type="text" placeholder="clave" class="bodyInputClave">
                     <input type="text" placeholder="valor" class="bodyInputValor" readonly>
-                </div>
                 </div>
                 <div id="addBodyInput" class="addBodyInputContainer">
                     <button id="addBodyInputBtn" onclick="addBodyInput()">Agregar</button>
                     <button id="removeBodyInputButton" onclick="removeBodyInput()">Eliminar</button>
                 </div>
-                </div>
+            </div>
             <div id="numberOfBodyElements">
                 <p>Numero de elementos body:</p>
-                <input id="numberOfBodyElementsInput" type="number" placeholder="añade el numero de elementos body">
+                <input id="numberOfBodyElementsInput" type="number" value="1">
             </div>
         </div>
     </div>
-    <div id="jsonOutputs">
+    <div>
         <button id="generateJsonButton" onclick="showJson()">generar json</button>
-        <h2>resultados</h2>
-        <button id="resultInfoButton" class="infoToolTip">!</button>
-        <div id="jsonFormatClean">
-            <p>JSON limpio</p>
-            <textarea  id="cleanJson" readonly></textarea>
-            <div id="buttonsForCleanJson">
-                <button id="copyCleanJson" onclick="copyCleanJson()">Copiar</button>
-                <button id="downloadCleanJson" onclick="downloadCleanJson()">Descargar</button>
+        <h2 id="resultados">resultados</h2>
+        <div id="jsonOutputs">
+            <div id="jsonFormatClean" class="column2">
+                <p>JSON limpio</p>
+                <button id="resultInfoButton" class="infoToolTip">!</button>
+                <textarea  id="cleanJson" readonly></textarea>
+                <div id="buttonsForCleanJson">
+                    <button id="copyCleanJson" onclick="copyCleanJson()" class="controlJson">Copiar</button>
+                    <button id="downloadCleanJson" onclick="downloadCleanJson()" class="controlJson">Descargar</button>
+                </div>
+            </div>
+            <div id="jsonFormatFull" class="column2">
+                <p>JSON completo</p>
+                <button id="fullJsonInfoButton" class="infoToolTip">!</button>
+                <textarea  id="fullJson" readonly></textarea>
+                <div id="buttonsForFullJson">
+                    <button id="copyFullJson" class="controlJson">Copiar</button>
+                    <button id="downloadFullJson" class="controlJson">Descargar</button>
+                    <button id="fillFullJson" class="controlJson">llenar Json</button>
+                </div>
             </div>
         </div>
-        <div id="jsonFormatFull">
-            <p>JSON completo</p>
-            <button id="fullJsonInfoButton" class="infoToolTip">!</button>
-            <textarea  id="fullJson" readonly></textarea>
-            <div id="buttonsForFullJson">
-                <button id="copyFullJson">Copiar</button>
-                <button id="downloadFullJson">Descargar</button>
-                <button id="fillFullJson">llenar Json</button>
-            </div>
-        </div>
-    </div>
     <hr>
     <div id="controlButtons">
-        <button id="resetButton">reiniciar</button>
-        <button id="clearFormatsButton">limpiar formatos</button>
+        <button id="resetButton" class="controlPage">reiniciar</button>
+        <button id="clearFormatsButton" class="controlPage">limpiar formatos</button>
     </div>
 </body>
 <hr>
