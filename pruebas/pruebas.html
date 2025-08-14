@@ -1,31 +1,78 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="../generalstyls.css">
-    <title>pruebas</title>
 </head>
 <header>
     <div id="messages">
+        <button id="closeMessage" onclick="closeMessage()">×</button>
         <p>este es un mensaje de ejemplo</p>
-        <button id="closeMessage">cerrar</button>
-        <button id="acceptMessage">aceptar</button>
-        <button id="cancelMessage">cancelar</button>
+        <div class="message-actions">
+            <button id="acceptMessage">aceptar</button>
+            <button id="cancelMessage" onclick="closeMessage()">cancelar</button>
+        </div>
     </div>
     <div id="navegationBar">
-        <link rel="icon" type="image/x-icon" href="../img/logo.png">
+        <img src="../img/logo.png" alt="Logo" class="logo">
         <h2>nombre de la pagina</h2>
-        <!-- aqui añadire una barra de navegacion/busqueda -->
+        <div class="searchBar">
+            <input type="text" placeholder="Buscar...">
+            <button type="submit">Buscar</button>
+        </div>
     </div>
-    <hr>
+    
     <h1>conversor a Json</h1>
 </header>
 <body>
-    <div id="prueba para la creacion del formato para el json">
-        <p>prueba para la creacion del formato para el json</p>
-        
+    <button onclick="showElements()">probar el creador de formato</button>
+    <hr>
+    <div id="inputsFormats">
+        <div id="headerFormatInput">
+            <div class="headerInputFormatContainer">
+                <input type="text" placeholder="clave" class="headerInputClave">
+                <input type="text" placeholder="valor" class="headerInputValor">
+            </div>
+            <div class="headerInputFormatContainer">
+                <input type="text" placeholder="clave" class="headerInputClave">
+                <input type="text" placeholder="valor" class="headerInputValor">
+            </div>
+            <div id="addHeaderInput" class="addHeaderInputContainer">
+                <button id="addHeaderInputBtn" onclick="addHeaderInput()">Agregar</button>
+                <button id="removeHeaderInputButton" onclick="removeHeaderInput()">Eliminar</button>
+            </div>
+        </div>
+        <div id="bodyFormatInput">
+            <div class="bodyInputFormatContainer">
+                <input type="text" placeholder="clave" class="bodyInputClave">
+                <input type="text" placeholder="valor" class="bodyInputValor" readonly>
+            </div>
+            <div class="bodyInputFormatContainer">
+                <input type="text" placeholder="clave" class="bodyInputClave">
+                <input type="text" placeholder="valor" class="bodyInputValor" readonly>
+            </div>
+            <div id="addBodyInput" class="addBodyInputContainer">
+                <button id="addBodyInputBtn" onclick="addBodyInput()">Agregar</button>
+                <button id="removeBodyInputButton" onclick="removeBodyInput()">Eliminar</button>
+            </div>
+        </div>
+        <div id="numberOfBodyElements">
+            <p>Numero de elementos body:</p>
+            <input id="numberOfBodyElementsInput" type="number" placeholder="añade el numero de elementos body">
+        </div>
     </div>
+    <div id="outputs">
+        <div id="headerFormatJson">
+            <textarea id="headerFormatJsonTextArea"></textarea>
+        </div>
+        <div id="bodyFormatJson">
+            <textarea id="bodyFormatJsonTextArea"></textarea>
+        </div>
+        <textarea  id="numbersOfBodyElements" readonly></textarea>
+    </div>
+    <hr>
 </body>
 <footer>
     <div id="info">
@@ -34,16 +81,19 @@
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex delectus ipsam fugiat excepturi quis praesentium beatae voluptatem molestias laboriosam deleniti repellendus nihil, eum architecto fugit, maxime natus ducimus odio dolores!</p>
         </div>
         <div id="contactMe">
-            <ul>
-                <li><a href="https://www.example1.com">Ejemplo 1</a></li>
-                <li><a href="https://www.example2.com">Ejemplo 2</a></li>
-                <li><a href="https://www.example3.com">Ejemplo 3</a></li>
-            </ul>
+            <p>mi contacto</p>
+            <div id="contactLinks">
+                <a class="contactLink" href="https://www.example1.com">Ejemplo 1</a>
+                <a class="contactLink" href="https://www.example2.com">Ejemplo 2</a>
+                <a class="contactLink" href="https://www.example3.com">Ejemplo 3</a>
+            </div>
         </div>
     </div>
-    <hr
+    <hr>
     <div id="copyright">
         <p>&copy; 2025 Mi Sitio Web. Todos los derechos reservados.</p>
     </div>
 </footer>
+<script src="../generalLogic.js"></script>
+<script src="pruebas.js"></script>
 </html>
