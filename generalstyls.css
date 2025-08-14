@@ -1,0 +1,213 @@
+/* Paleta de colores */
+:root {
+    --fondo-principal: #F5F7FA;
+    --header-footer: #FFFFFF;
+    --texto-principal: #2C3E50;
+    --texto-secundario: #646464;
+    --links: #27AE60;
+    --botones: #2ECC71;
+    --resaltados: #F39C12;
+}
+
+a{
+    color: var(--links);
+    text-decoration: none;
+}
+
+header {
+    background-color: var(--header-footer);
+    padding-bottom: 10px;
+}
+
+#navegationBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--header-footer);
+    color: var(--texto-principal);
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#navegationBar .logo {
+    height: 32px;
+    width: auto;
+    margin-right: 10px;
+}
+
+#navegationBar h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+
+.searchBar input[type="text"] {
+    width: 240px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    background-color: #cdd2d3;
+}
+
+.searchBar button[type="submit"] {
+    padding: 9px 14px;
+    background-color: var(--links);
+    color: #ffffff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.searchBar button[type="submit"]:hover {
+    background-color: #229954;
+}
+
+header h1 {
+    text-align: left;
+    color: var(--texto-principal);
+    font-size: 24px;
+    margin-top: 15px;
+}
+
+body {
+    background-color: #F5F7FA;
+}
+
+#messages {
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e2b9b9;
+    border: 1px solid #9b9b9b;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #2c3e50;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    padding: 20px 30px;
+    min-width: 280px;
+    max-width: 400px;
+    z-index: 1000;
+    display: none; 
+}
+
+
+#closeMessage {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #c0392b;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 28px;
+    text-align: center;
+}
+
+#messages p {
+    font-size: medium;
+    margin: 10px 0 20px 0;
+}
+
+.message-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#acceptMessage {
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+}
+
+#cancelMessage {
+    background-color: #c0392b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+}
+
+#acceptMessage:hover {
+    background-color: #229954;
+}
+#cancelMessage:hover, #closeMessage:hover {
+    background-color: #a93226;
+}
+
+/*ahora el fotter*/
+
+footer{
+    background-color: var(--header-footer);
+    color: var(--texto-principal);
+    padding: 12px 20px;
+    text-align: center;
+}
+
+#info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+#aboutMe, #contactMe {
+    flex: 1 1 0;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: var(--texto-secundario);
+    padding: 0 16px;
+    border: 1px solid #e0e0e0; 
+    border-radius: 8px;
+    align-items: center;
+    
+}
+
+#contactLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px; /* Espacio entre los enlaces */
+}
+
+.contactLink {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--links);
+    text-decoration: none;
+}
+
+.contactLink:hover {
+    text-decoration: underline;
+}
