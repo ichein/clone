@@ -180,3 +180,39 @@ body{
 .controlPage:hover{
     background-color: var(--resaltados);
 }
+
+#fileInputForFullJson {
+    margin-top: 10px;
+    color: var(--texto-secundario);
+    background-color: var(--header-footer);
+    border: 1px solid var(--texto-secundario);
+    padding: 8px;
+    border-radius: 4px;
+    width: calc(100% - 16px);
+    cursor: pointer;
+    text-align: center;
+    display: none;
+
+}
+#fileInputForFullJson:hover {
+    background-color: var(--resaltados);
+    color: #FFFFFF;
+
+}
+
+#showFinalResul {
+    margin-top: 10px;
+    color: var(--texto-secundario);
+    background-color: var(--header-footer);
+    border: 1px solid var(--texto-secundario);
+    padding: 8px;
+    border-radius: 4px;
+    width: calc(100% - 16px);
+    cursor: pointer;
+    text-align: center;
+    display: none;
+
+}
+#showFinalResul:hover {
+    background-color: var(--resaltados);
+    color: #FFFFFF;

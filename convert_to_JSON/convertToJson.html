@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="convertToJson.css">
     <link rel="stylesheet" href="../generalstyls.css"> <!-- estilos generales -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
     <title>convertir a json</title>
 </head>
 <header>
@@ -88,7 +91,9 @@
                 <div id="buttonsForFullJson">
                     <button id="copyFullJson" class="controlJson">Copiar</button>
                     <button id="downloadFullJson" class="controlJson">Descargar</button>
-                    <button id="fillFullJson" class="controlJson">llenar Json</button>
+                    <button id="fillFullJson" class="controlJson" onclick="showExtra()">llenar Json</button>
+                    <button id="showFinalResult" class="controlJson">mostrar resultado</button>
+                    <input type="file" id="fileInputForFullJson" accept=".xlsx, .xls, .csv">
                 </div>
             </div>
         </div>

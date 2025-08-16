@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pruebas</title>
+    <!-- importaciones para la lectura de archivos -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
+    <!-- fin de importaciones para la lectura de archivos -->
     <link rel="stylesheet" href="../generalstyls.css">
 </head>
 <header>
@@ -27,6 +32,16 @@
     <h1>conversor a Json</h1>
 </header>
 <body>
+    <!-- ^ pruebas para el creador de jsnons-->
+    <div id="fileUpLoad">
+        <button onclick="fillFields()">llenarcampos</button>
+        <button onclick="showFinal()">mostrar resultados</button>
+        <input type="file" id="fileInput" accept=".xlsx, .xls, .csv"> <!-- recibr un archivo del tipo hoja de calculo--><br>
+        <textarea name="mostrar json lleno" id="showJson"></textarea>
+    </div>
+    <!-- ^ fun del pruebas para el creador de llenador de jsons-->
+    <hr>
+    <!-- ^ pruebas para el creador de json-->
     <button onclick="showElements()">probar el creador de formato</button>
     <hr>
     <div id="inputsFormats">
@@ -73,6 +88,7 @@
         <textarea  id="numbersOfBodyElements" readonly></textarea>
     </div>
     <hr>
+    <!-- ^ fin de las pruebas para el creador de json-->
 </body>
 <footer>
     <div id="info">
